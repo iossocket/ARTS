@@ -43,5 +43,7 @@ public int[] twoSum(int[] nums, int target) {
 
 #### Sharing
 
+[每次都会忘了OAuth的流程，用到时再找文章看一遍，反复太多次，还是自己写篇笔记记录下来，也是对自己思考的一个总结吧。](!https://www.jianshu.com/p/df42b5a10505)
+
 
 
