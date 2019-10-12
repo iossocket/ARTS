@@ -39,5 +39,9 @@ public int[] twoSum(int[] nums, int target) {
 
 #### Tips
 
+[RN如何优雅的实现refocus](https://www.jianshu.com/p/ee660e567e26)
+
 #### Sharing
+
+
 
