@@ -42,11 +42,14 @@ public int[] twoSum(int[] nums, int target) {
 
 #### Tips
 
+源自一个工作中的项目需求
 [RN如何优雅的实现refocus](https://www.jianshu.com/p/ee660e567e26)
 
 #### Sharing
 
-[每次都会忘了OAuth的流程，用到时再找文章看一遍，反复太多次，还是自己写篇笔记记录下来，也是对自己思考的一个总结吧。](!https://www.jianshu.com/p/df42b5a10505)
+每次都会忘了OAuth的流程，用到时再找文章看一遍，反复太多次，还是自己写篇笔记记录下来，也是对自己思考的一个总结吧
+
+[链接](https://www.jianshu.com/p/df42b5a10505)
 
 
 
