@@ -181,10 +181,12 @@ class MyLinkedList {
 ***SwiftUI by Tutorials*** raywenderlich 发布的一本英文电子书
 继续上一周的内容，这次来聊聊数据的流动
 
-[链接]()
+[链接](https://www.jianshu.com/p/6141b4998141)
 
 #### Tips
 
+将RN作为Framework引入需要的Scripts
 
+[链接]()
 
 #### Sharing
