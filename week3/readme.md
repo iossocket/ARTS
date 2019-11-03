@@ -179,9 +179,9 @@ class MyLinkedList {
 #### Review
 
 ***SwiftUI by Tutorials*** raywenderlich 发布的一本英文电子书
-继续上一周的内容，这次来聊聊数据的流动
+继续上一周的内容，这次来聊聊数据的绑定
 
-[链接](https://www.jianshu.com/p/6141b4998141)
+[链接](https://www.jianshu.com/p/a2a69fb070b0)
 
 #### Tips
 
