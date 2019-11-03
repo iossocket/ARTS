@@ -190,3 +190,6 @@ class MyLinkedList {
 [链接]()
 
 #### Sharing
+
+SSO - OpenID connect + JWT
+[链接](https://www.jianshu.com/p/3ca79d9a9627)
