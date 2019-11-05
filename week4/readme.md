@@ -2,149 +2,149 @@
 
 #### Algorithm
 
-Design Linked List
-Design your implementation of the linked list. You can choose to use the singly linked list or the doubly linked list. A node in a singly linked list should have two attributes: val and next. val is the value of the current node, and next is a pointer/reference to the next node. If you want to use the doubly linked list, you will need one more attribute prev to indicate the previous node in the linked list. Assume all nodes in the linked list are 0-indexed.
+Design and implement a data structure for Least Recently Used (LRU) cache. It should support the following operations: get and put.
 
-Implement these functions in your linked list class:
+get(key) - Get the value (will always be positive) of the key if the key exists in the cache, otherwise return -1.
+put(key, value) - Set or insert the value if the key is not already present. When the cache reached its capacity, it should invalidate the least recently used item before inserting a new item.
 
-1. get(index) : Get the value of the index-th node in the linked list. If the index is invalid, return -1.
-2. addAtHead(val) : Add a node of value val before the first element of the linked list. After the insertion, the new node will be the first node of the linked list.
-3. addAtTail(val) : Append a node of value val to the last element of the linked list.
-4. addAtIndex(index, val) : Add a node of value val before the index-th node in the linked list. If index equals to the length of linked list, the node will be appended to the end of linked list. If index is greater than the length, the node will not be inserted. If index is negative, the node will be inserted at the head of the list.
-5. deleteAtIndex(index) : Delete the index-th node in the linked list, if the index is valid.
+The cache is initialized with a positive capacity.
+
+Follow up:
+Could you do both operations in O(1) time complexity?
+
+Example:
+```
+LRUCache cache = new LRUCache( 2 /* capacity */ );
+
+cache.put(1, 1);
+cache.put(2, 2);
+cache.get(1);       // returns 1
+cache.put(3, 3);    // evicts key 2
+cache.get(2);       // returns -1 (not found)
+cache.put(4, 4);    // evicts key 1
+cache.get(1);       // returns -1 (not found)
+cache.get(3);       // returns 3
+cache.get(4);       // returns 4
+```
+
+> 解题思路：使用一个双向链表来存储顺序，一个字典来检查是否存在该元素。使用双向链表是因为可以加快删除指定元素的速度，不需要再遍历链表。
+> 题目中有一点没有说清楚，当put一个存在的key时，应该更新value值，同时改变它在链表中的位置。
 
 ```swift
 class Node {
-    private let value: Int
+    private let key: Int
+    private var value: Int
     var nextNode: Node?
+    var preNode: Node?
     
-    init(value: Int) {
+    init(key: Int, value: Int) {
+        self.key = key
         self.value = value
     }
     
     func getValue() -> Int {
         return value
     }
+    
+    func setValue(_ value: Int) {
+        self.value = value
+    }
+    
+    func getKey() -> Int {
+        return key
+    }
 }
 
-class MyLinkedList {
+class LinkedList {
 
-    var count: Int = 0
     private var head: Node?
+    private var tail: Node?
     
-    /** Initialize your data structure here. */
     init() {}
     
-    /** Get the value of the index-th node in the linked list. If the index is invalid, return -1. */
-    func get(_ index: Int) -> Int {
-        if count == 0 || index >= count || index < 0 {
-            return -1
-        }
+    func addAtHead(_ node: Node) {
         guard let head = self.head else {
+            self.head = node
+            self.tail = node
+            return
+        }
+        node.nextNode = head
+        head.preNode = node
+        self.head = node
+    }
+    
+    func deleteTail() -> Node? {
+        guard let tail = tail else {
+            return nil
+        }
+        
+        self.tail = tail.preNode
+        self.tail?.nextNode = nil
+        return tail
+    }
+    
+    func deleteNode(_ node: Node) {
+        guard let head = self.head, let tail = self.tail else {
+            return
+        }
+        
+        if node.getKey() == head.getKey() {
+            self.head = self.head?.nextNode
+            self.head?.preNode = nil
+            return
+        }
+        
+        if node.getKey() == tail.getKey() {
+            self.tail = self.tail?.preNode
+            self.tail?.nextNode = nil
+            return
+        }
+        
+        node.preNode?.nextNode = node.nextNode
+        node.nextNode?.preNode = node.preNode
+        node.preNode = nil
+        node.nextNode = nil
+    }
+}
+
+class LRUCache {
+
+    private let capacity: Int
+    private let list: LinkedList
+    private var dict: [Int: Node]
+    
+    init(_ capacity: Int) {
+        self.capacity = capacity
+        self.list = LinkedList()
+        self.dict = [Int: Node]()
+    }
+    
+    func get(_ key: Int) -> Int {
+        guard let node = dict[key] else {
             return -1
         }
-        
-        var currentIndex = 0
-        var currentNode: Node? = head
-        while index != currentIndex {
-            currentIndex += 1
-            currentNode = currentNode?.nextNode
-        }
-        return currentNode == nil ? -1 : currentNode!.getValue()
+        list.deleteNode(node)
+        list.addAtHead(node)
+        return node.getValue()
     }
     
-    /** Add a node of value val before the first element of the linked list. After the insertion, the new node will be the first node of the linked list. */
-    func addAtHead(_ val: Int) {
-        count += 1
-        if let head = self.head {
-            let newHead = Node(value: val)
-            newHead.nextNode = head
-            self.head = newHead
-            return
-        }
-        head = Node(value: val)
-    }
-    
-    /** Append a node of value val to the last element of the linked list. */
-    func addAtTail(_ val: Int) {
-        var currentNode = head
-        while currentNode?.nextNode != nil {
-            currentNode = currentNode?.nextNode
-        }
-        let node = Node(value: val)
-        currentNode?.nextNode = node
-        count += 1
-    }
-    
-    /** Add a node of value val before the index-th node in the linked list. If index equals to the length of linked list, the node will be appended to the end of linked list. If index is greater than the length, the node will not be inserted. */
-    func addAtIndex(_ index: Int, _ val: Int) {
-        if index > count {
+    func put(_ key: Int, _ value: Int) {
+        if let node = dict[key] {
+            node.setValue(value)
+            list.deleteNode(node)
+            list.addAtHead(node)
             return
         }
         
-        if index <= 0 {
-            addAtHead(val)
+        let node = Node(key: key, value: value)
+        dict[key] = node
+        list.addAtHead(node)
+        if dict.keys.count <= capacity {
             return
         }
-        
-        if index == count {
-            addAtTail(val)
-            return
+        if let tail = list.deleteTail() {
+            dict.removeValue(forKey: tail.getKey())
         }
-        
-        var currentNode = head
-        var currentIndex = 0
-        while currentIndex != index - 1 {
-            currentNode = currentNode?.nextNode
-            currentIndex += 1
-        }
-        
-        count += 1
-        let node = Node(value: val)
-        node.nextNode = currentNode?.nextNode
-        currentNode?.nextNode = node
-    }
-    
-    /** Delete the index-th node in the linked list, if the index is valid. */
-    func deleteAtIndex(_ index: Int) {
-        if index < 0 || index > count - 1 {
-            return
-        }
-        
-        count -= 1
-        if index == 0 {
-            head = head?.nextNode
-            return
-        }
-        
-        var currentNode = head
-        var currentIndex = 0
-        while currentIndex != index - 1 {
-            currentIndex += 1
-            currentNode = currentNode?.nextNode
-        }
-        currentNode?.nextNode = currentNode?.nextNode?.nextNode
-    }
-    
-    func printList() -> String {
-        if count == 0 {
-            return ""
-        }
-        
-        var currentIndex = 0
-        var currentNode = head
-        var result = ""
-        while currentNode?.nextNode != nil {
-            result += "\(currentNode!.getValue()) -> "
-            currentNode = currentNode?.nextNode
-            currentIndex += 1
-        }
-        result += "\(currentNode!.getValue())"
-        return result
-    }
-    
-    func getCount() -> Int {
-        return count
     }
 }
 ```
@@ -152,18 +152,8 @@ class MyLinkedList {
 #### Review
 
 ***SwiftUI by Tutorials*** raywenderlich 发布的一本英文电子书
-继续上一周的内容，这次来介绍一下怎么画一个自定义的view
-
-[链接](https://www.jianshu.com/p/d493044e9079)
+继续上一周的内容，这次来介绍如何将SwiftUI集成到已有项目中
 
 #### Tips
 
-项目中是如何集成RN的
-
-[如何将React Native集成到已有iOS项目中](https://www.jianshu.com/p/68aa56eddd11)
-
 #### Sharing
-
-一直想要搞明白OpenID Connect是神马，它在解决一个神马问题，看了很多文章视频还是有点糊涂。所以想换个思路，看看它和OAuth的差异到底是什么，从这点上帮助理解一下。
-
-[链接](https://www.jianshu.com/p/a773806f9831)
