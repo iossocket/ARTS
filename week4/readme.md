@@ -152,8 +152,14 @@ class LRUCache {
 #### Review
 
 ***SwiftUI by Tutorials*** raywenderlich 发布的一本英文电子书
-继续上一周的内容，这次来介绍如何将SwiftUI集成到已有项目中
+继续上一周的内容，这次来介绍如何将SwiftUI集成到已有项目中:[link](https://www.jianshu.com/p/fbc920c11b0d)
 
 #### Tips
 
+数据库相关的两个工具 Navicat 和 PDMan
+
+[link](https://www.jianshu.com/p/5a85e1a26250)
+
 #### Sharing
+
+开始重新学backend，开始写一个系列文章，第一篇[工程构建](https://www.jianshu.com/p/f1d19982912d)
