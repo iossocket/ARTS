@@ -63,6 +63,56 @@ public class Solution {
 
 #### Tips
 
+#### mongo 开发环境配置
+
+```
+下载mongo镜像
+docker pull mongo
+
+运行mongo
+run --name mongo -p 27017:27017 -v ~/docker-data/mongo:/data/db -e MONGO_INITDB_ROOT_USERNAME=admin -e MONGO_INITDB_ROOT_PASSWORD=admin -d mongo
+-e: 设置环境变量
+-d: 后台运行
+-p: 端口映射
+-v: 挂载存储空间
+--name: 指定运行后container的名字
+最后的mongo指的是image的名字
+
+
+登录docker的bash
+docker exec -it mongo bash
+
+通过shell连接mongo
+mongo -u admin -p admin
+
+创建库
+use springbucks
+
+创建用户
+db.createUser(
+    {
+      user: "springbucks",
+      pwd: "springbucks",
+      roles: [
+         { role: "readWrite", db: "springbucks" }
+      ]
+})
+
+查看所有集合
+show collections
+
+db.coffee.find()
+db.coffee.remove({"name": "espresso"})
+```
+#### redis 开发环境配置
+```
+docker pull redis
+docker run --name redis -d -p 6379:6379 redis
+
+docker exec -it redis bash
+redis-cli
+HGETALL "springbucks-menu"
+```
 
 #### Sharing
 
