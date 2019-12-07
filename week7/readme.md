@@ -67,7 +67,8 @@ public class Solution {
 
 #### Review
 
-***SwiftUI by Tutorials*** raywenderlich 发布的一本英文电子书
+***SwiftUI by Tutorials*** raywenderlich 发布的一本英文电子书，学习一下SwiftUI的常见控件
+[SwiftUI - 常用控件](https://www.jianshu.com/p/c22c6547d63e)
 
 #### Tips
 
