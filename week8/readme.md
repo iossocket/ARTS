@@ -60,8 +60,8 @@ class Solution {
 
 #### Review
 
-***SwiftUI by Tutorials*** raywenderlich 发布的一本英文电子书，学习一下SwiftUI的常见控件
-
+***SwiftUI by Tutorials*** raywenderlich 发布的一本英文电子书，学习一下SwiftUI的子视图布局：
+[SwiftUI - Stack布局详解（1）](https://www.jianshu.com/p/c3346a5cc8b1)
 
 #### Tips
 
