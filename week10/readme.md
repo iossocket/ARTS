@@ -70,7 +70,8 @@ class MinStack {
 #### Review
 
 ***SwiftUI by Tutorials*** raywenderlich 发布的一本英文电子书
-[SwiftUI]()
+
+[SwiftUI - Navigation & List](https://www.jianshu.com/p/643ce6cd8345)
 
 #### Tips
 
