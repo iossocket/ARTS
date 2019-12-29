@@ -75,7 +75,8 @@ class MinStack {
 
 #### Tips
 
-[BUCK - 使用BUCK编译iOS项目(3)]()
+本节中我们将使用BUCK来编译一个自定义的library，在此library中使用了Objective-C和C++；之后添加一个二进制的Framework，这里集成的是腾讯的mars日志框架。
+[BUCK - 使用BUCK编译iOS项目(3)](https://www.jianshu.com/p/fa2d94283da3)
 
 
 #### Sharing
