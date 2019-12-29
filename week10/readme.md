@@ -83,4 +83,4 @@ class MinStack {
 
 开始重新学backend，开始写一个系列文章：
 
-[]()
+[SpringSecurity的基本使用方式，为集成Keycloak做点准备工作](https://www.jianshu.com/p/f5725c8285d7)
