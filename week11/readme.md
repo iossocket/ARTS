@@ -146,7 +146,7 @@ override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out
 }
 
 ```
-4. Cocoapods 插件 Cocoapods package 用于生产SDK
+4. Cocoapods 插件 [cocoapods-packager](https://github.com/CocoaPods/cocoapods-packager) 用于生产SDK
 
 #### Sharing
 
