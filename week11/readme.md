@@ -96,7 +96,9 @@ class MyCircularQueue {
 
 #### Review
 
-***SwiftUI by Tutorials*** raywenderlich 发布的一本英文电子书
+***SwiftUI by Tutorials*** raywenderlich 发布的一本英文电子书，SwiftUI的present方式是通过一个state变量来控制显示收起的
+
+[SwiftUI - Navigation & List & Present](https://www.jianshu.com/p/643ce6cd8345)
 
 #### Tips
 
@@ -144,7 +146,11 @@ override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out
 }
 
 ```
+4. Cocoapods 插件 Cocoapods package 用于生产SDK
 
 #### Sharing
 
 开始重新学backend，开始写一个系列文章：
+
+使用Keycloak来protect rest api，官方文档写的真是。。。
+[Keycloak(4)](https://www.jianshu.com/p/e732e98ed8f5)
