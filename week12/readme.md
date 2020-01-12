@@ -59,3 +59,5 @@ class Solution {
 #### Sharing
 
 开始重新学backend，开始写一个系列文章：
+
+Keycloak的第五篇，[通过rest api创建用户](https://www.jianshu.com/p/938f2cc75270)
