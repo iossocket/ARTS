@@ -79,4 +79,4 @@ class Timeout {
 
 开始重新学backend，开始写一个系列文章：
 
-Keycloak的第五篇，[配置OTP](https://www.jianshu.com/p/a4e3b2923b83)
+Keycloak的第六篇，[配置OTP](https://www.jianshu.com/p/a4e3b2923b83)
