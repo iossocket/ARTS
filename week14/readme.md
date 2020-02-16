@@ -164,4 +164,4 @@ module.exports = cli;
 
 开始重新学backend，开始写一个系列文章：
 
-Keycloak的第七篇
+Keycloak的第七篇 [Identity Provider](https://www.jianshu.com/p/069ce3f1147f)
