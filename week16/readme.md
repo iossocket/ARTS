@@ -70,7 +70,7 @@ class Solution {
 
 #### Tips
 
-[React Native 拆包实践3 - react-native bundle]()
+[React Native 拆包实践3 - react-native bundle](https://www.jianshu.com/p/359721b85f12)
 
 #### Sharing
 
