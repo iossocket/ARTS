@@ -75,3 +75,5 @@ class Solution {
 #### Sharing
 
 开始重新学backend，开始写一个系列文章：
+
+Keycloak的第九篇 [Authentication SPI](https://www.jianshu.com/p/d18daee88e92)
