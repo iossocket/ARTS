@@ -3,20 +3,19 @@
 #### Algorithm
 ##### Binary Search
 
-Given a sorted array and a target value, return the index if the target is found. If not, return the index where it would be if it were inserted in order.
-
-You may assume no duplicates in the array.
+Given a sorted (in ascending order) integer array nums of n elements and a target value, write a function to search target in nums. If target exists, then return its index, otherwise return -1.
 
 **Example:**
 
 ```
-Input: [1,3,5,6], 5
-Output: 2
+Input: nums = [-1,0,3,5,9,12], target = 9
+Output: 4
+Explanation: 9 exists in nums and its index is 4
 ```
 
 ```java
 class Solution {
-    public int searchInsert(int[] nums, int target) {
+    public int search(int[] nums, int target) {
         int start = 0;
         int end = nums.length - 1;
 
@@ -30,46 +29,67 @@ class Solution {
                 start = mid + 1;
             }
         }
-        return start;
+        return -1;
     }
 }
 ```
 
 #### Review
-原文链接：[Locale](https://nshipster.com/locale/)
+原文链接：[Date​Components](https://nshipster.com/datecomponents/)
 
-有很多方法会涉及到国际化，通常这些方法都有一个optional的参数，可以根据需要传入，如果不传或是传入nil时，它的行为将基于当前用户手机的设置而决定，下面给出了一个例子。类似这样的情况还有很多比如最常见的一周的起始是周一还是周日。
+当使用HealthKit时常常需要计算日期，比如计算本周的开始时间和结束时间，某天的起始时间等等，正确的使用`Date​Components`可以简化我们的计算过程。这篇Matt大神给出了很好的解释。不要再使用：`date.addingTimeInterval(60 * 60 * 24)`这种计算方式了。
+引用其中的一句话来说明`Date​Components`都做了什么：
 
+> It’s a relatively recent addition to Foundation for representing a date or duration of time.
+
+1. 当作为date使用时：
+```swift
+let calendar = Calendar.current
+let now = Date()
+
+let dateComponents = DateComponents(calendar: calendar,year: 2020, month: 10, day: 10)
+let date = calendar.date(from: dateComponents)!
+// 2020-10-10
+
+
+// 可以获得今天的年月日等一系列数据
+calendar.dateComponents([.year, .month, .day, .timeZone, .weekday, .weekdayOrdinal], from: now)
+
+// 获取当月的第一天
+var beginningOfMonth: Date?
+beginningOfMonth = calendar.dateInterval(of: .month, for: now)!.start
+
+var tomorrow: Date?
+tomorrow = calendar.date(byAdding: .day, value: 1, to: now) // equals add 24 hours
+
+// 获取明天的起始时刻
+let startOfTmr = calendar.dateComponents([.year, .month, .day], from: tomorrow!)
+calendar.date(from: xx)
 ```
-import Foundation
 
-let units = ["meter", "smoot", "agate", "ångström"]
+2. 当作为duration使用时
+```swift
+let calendar = Calendar.current
+let now = Date()
 
-units.sorted { (lhs, rhs) in
-    lhs.compare(rhs, locale: .current) == .orderedAscending
-}
+// 一个月加一天
+let duration = DateComponents(calendar: calendar, year: 0, month: 1, day: 1)
+let date = calendar.date(byAdding: duration, to: date)!
+
+
+// this is a range: 2020-04-30 16:00:00 +0000 to 2020-05-31 16:00:00 +0000
+let monthInterval = calendar.dateInterval(of: .month, for: now)!
+
+// 获取本月一个用多少个小时
+calendar.dateComponents([.hour], from: monthInterval.start, to: monthInterval.end)
 ```
-
-再给出一个有用的tips，在HTTP的header中的Accept-Language，通常是被我们忽略掉的，如果有一天我们要支持国际化，再加上这个header就有点晚了，那是就需要强制用户升级才能支持这个特性。
-```
-import Foundation
-
-let url = URL(string: "https://nshipster.com")!
-var request = URLRequest(url: url)
-
-let acceptLanguage = Locale.preferredLanguages.joined(separator: ", ")
-request.setValue(acceptLanguage, forHTTPHeaderField: "Accept-Language")
-```
-
 
 #### Tips
 
-这周在RN项目中集成了Charts，这个library可以说是图表界的老大了。集成过程过程中遇到了一个有意思的点，我们的x轴的文字是两行的，`BarChartView`的布局初始化如果放在`init(frame: CGReact)`中，无论使用frame，autoResizing或是autoLayout都只能显示一行，但把chart在x轴的两个尽头处拖动一下，瞬间换为两行。分析之后得知这是Charts布局的问题，它是通过CGContext画出来的。
-
-解决方式：在`init(frame: CGReact)`中仅执行addSubview的操作，而把布局的代码放在`layoutSubviews()`中执行
+pp助手下线后，如何获取ipa文件 => iMazing
+https://www.jianshu.com/p/33dceeadf8a1
 
 
 #### Sharing
 
-分享的第七篇
-[React Native 拆包实践7 - Android 按需加载jsbundle](https://www.jianshu.com/p/ce80c2924292)
+[React Native 拆包实践6 - Android 启动流程](https://www.jianshu.com/p/89757051ffe5)
